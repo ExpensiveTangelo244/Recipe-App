@@ -1,0 +1,40 @@
+<%- include("partials/header") -%>
+<section id="top-section">
+  <h2>Find Meals For Your Ingredients</h2>
+  <p>Real food doesn't have ingredients, real food is ingredients.<br /><i>- Jamie Oliver</i></p>
+  <form action="/" method="post">
+    <input name="ingredient" id="searchbar" type="text" placeholder="Enter the name of meal" autocomplete="off" />
+    <button id="submit-button" type="submit"><i class="fa-solid fa-2xl fa-magnifying-glass"></i></button>
+  </form>
+</section>
+<section id="result-section">
+  <h2>Your Search Results:</h2>
+  <% if (meal == null) { %> <% if (count == false) { %>
+  <h1 class="noResult">Sorry, we didn't find any meal!</h1>
+  <% } %> <% } else { %>
+  <div class="grid-container">
+    <% meal.forEach(element => { %>
+    <div class="grid-item">
+      <img class="recipeImg" src="<%= element.strMealThumb %>" alt="" />
+      <h3><%= element.strMeal %></h3>
+      <button class="recipeBtn">Get Recipe</button>
+      <div class="recipeModal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 class="modalName"><%= element.strMeal %></h2>
+          <p class="category"><%= element.strCategory %></p>
+          <h3 class="noMargin-h3">
+            Instructions:
+            <p class="instructions"><%= element.strInstructions %></p>
+            <img class="recipeImgPrev" src="<%= element.strMealThumb %>" alt="">
+            <a class="youtubeLink" href="<%= element.strYoutube %>" target="_blank">Watch Video</a>
+            <button class="recipeBtn closeBtn">Close</button>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+</section>
+<%- include("partials/footer") -%>
